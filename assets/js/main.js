@@ -18,10 +18,9 @@ for (let link of links) {
 }
 
 // ALterando o HEADER no scroll
+const $header = document.querySelector('#header')
+const navHeight = $header.offsetHeight
 function changeHeaderWhenScroll() {
-  const $header = document.querySelector('#header')
-  const navHeight = $header.offsetHeight
-
   if (window.scrollY >= navHeight) {
     // maior que a alura do header
     $header.classList.add('scroll')
@@ -39,7 +38,13 @@ const swiper = new Swiper('.swiper-container', {
     el: '.swiper-pagination'
   },
   mousewheel: true,
-  keyboard: true
+  keyboard: true,
+  breakpoints: {
+    767: {
+      slidesPerView: 2,
+      setWrapperSize: true
+    }
+  }
 })
 
 // SCROLLREVEALJS -  mostrar elementos no scroll da pagina
@@ -63,9 +68,8 @@ scrollReveal.reveal(
 
 // FUNCTION BACK TO TOP
 
+const backToTopButton = document.querySelector('.back-to-top')
 function backToTop() {
-  const backToTopButton = document.querySelector('.back-to-top')
-
   if (window.scrollY >= 560) {
     backToTopButton.classList.add('show')
   } else {
@@ -73,8 +77,35 @@ function backToTop() {
   }
 }
 
+// FUNCTION ACTIVE TITLE MENU NAV
+const $sections = document.querySelectorAll('main section[id]')
+
+function activateMenuAtCurrentSection() {
+  const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+
+  for (let section of $sections) {
+    let sectionTop = section.offsetTop
+    let sectionHeight = section.offsetHeight
+    let sectionId = section.getAttribute('id')
+
+    let checkpointStart = checkpoint >= sectionTop
+    let checkpointEnd = checkpoint <= sectionTop + sectionHeight
+
+    if (checkpointStart && checkpointEnd) {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.add('active')
+    } else {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.remove('active')
+    }
+  }
+}
+
 // WHEN THIS PAGE HAS SCROLL EVENT
 window.addEventListener('scroll', function () {
   changeHeaderWhenScroll()
   backToTop()
+  activateMenuAtCurrentSection()
 })
