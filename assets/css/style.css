@@ -139,17 +139,6 @@ body {
   background-color: var(--body-color);
 }
 
-/* #header.scroll {
-  background: var(--base-color);
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-}
-
-#header.scroll .logo span,
-#header.scroll .icon-menu {
-  color: #fff;
-  transition: color 0.3s;
-} */
-
 /* Logo */
 .logo {
   font: 700 1.31rem var(--title-font-family);
@@ -238,6 +227,27 @@ nav.show ul {
 
 nav.show ul.grid {
   gap: 4rem;
+}
+
+/* header scroll */
+
+#header.scroll {
+  background: var(--base-color);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+}
+
+#header.scroll .logo span,
+#header.scroll .icon-menu {
+  color: #fff;
+  transition: color 0.3s;
+}
+
+#header.scroll nav ul li a {
+  color: #fff;
+}
+
+#header.scroll nav ul li a::after {
+  background: #fff;
 }
 
 /* Togle menu*/
@@ -380,7 +390,9 @@ nav.show div.icon-close {
   margin-left: 0;
   margin-right: 0;
 }
-
+#testimonials .container .testimonials {
+  overflow: hidden;
+}
 #testimonials header {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
